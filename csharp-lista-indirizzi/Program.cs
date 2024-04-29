@@ -42,11 +42,13 @@
                         {
 
                         }
+
                     string Provincia = separatire[4];
                         if (Provincia.Length > 3)
                         {
                             Provincia = "dato non valido";
                         }
+
                     int ZIP = int.Parse(separatire[5]);
                         if ( ZIP == 0 )
                         {
