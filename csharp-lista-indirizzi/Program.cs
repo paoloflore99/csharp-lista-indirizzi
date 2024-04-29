@@ -49,16 +49,16 @@
                             Provincia = "dato non valido";
                         }
 
-                    int ZIP = int.Parse(separatire[5]);
-                        if ( ZIP == 0 )
+                        //int ZIP = int.Parse(separatire[5]);
+                        int ZIP = 0 ;
+                        if (separatire.Length >= 5 )
                         {
-                            string valoreZIP = ZIP.ToString();
-                            valoreZIP = "numero  non valido ";
-                            valoreZIP = separatire[5];
-
+                            if (int.TryParse(separatire[5] , out int parsedZIP))
+                            {
+                                ZIP= parsedZIP;
+                            }
                         }
-
-
+                        
 
 
                         Indirizzo Bo = new Indirizzo(Nome, Cognome, Strada, Citta, Provincia, ZIP);
@@ -69,11 +69,12 @@
             } catch(FormatException e)
             
             {
-                Console.WriteLine("nessun risultato");
+                Console.WriteLine("se non sono presenti tutti i dati viene bloccato ");
             }
             catch (Exception e)
             {
-                Console.WriteLine("nessun risultato numero 2");
+
+                Console.WriteLine($"nessun risultato numero 2 {e.Message}");
             }
             finally
             {
@@ -88,3 +89,4 @@
         }
     }
 }
+//ci sono 2 errori con il FormatException , perche mancano le caselle con i  numeri , devo fare in modo che se mancano allora a valore 0 
