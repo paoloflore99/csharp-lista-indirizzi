@@ -4,51 +4,67 @@
     {
         static void Main(string[] args)
         {
-
-            //n questo esercizio dovrete leggere un file CSV, che cambia poco da quanto appena visto
-            //nel live-coding in classe, e salvare tutti gli indirizzi in esso contenuti all’interno di una lista di oggetti istanziati a partire dalla classe Indirizzo.
-
-
-
-            //1 salvo il percorso 
+ 
             string path = "C:\\boolean\\addresses.csv";
-
-            //2 apertura e lettura 
-            var sorgente = File.ReadAllText(path);
-
-            //3 stampo in terminale
-            //Console.WriteLine(sorgente);
-
-            //non va 
-            //sorgente.EndOfStream
+            StreamReader sorgente = File.OpenText(path);
 
             List<Indirizzo> IndirizziPersonali = new List<Indirizzo>();
 
 
+            while (sorgente.EndOfStream == false) 
+
+            try {
+
+                {
+                    string? riga = sorgente.ReadLine();
+                    string[] separatire = riga.Split(',');
+
+                    string Nome = separatire.Length > 0 ? separatire[0] : "nome mancante";
+                    string Cognome = separatire.Length > 0 ? separatire[1] : "cognome mancante";
+                        if (Cognome == null)
+                        {
+                            Cognome = "Cognome mancante";
+                        }
+                    string Strada = separatire[2];
+                        if (Strada.Length < 5)
+                        {
+                            Strada = "dato non completo";
+                        }
+                    string Citta = separatire[3];
+                        if (Strada.Length < 5)
+                        {
+
+                        }
+                    string Provincia = separatire[4];
+                        if (Provincia.Length > 3)
+                        {
+                            Provincia = "dato non valido";
+                        }
+                   // int ZIP = int.Parse(separatire[5]);
 
 
 
-            try
-            {
 
-                var separatire = sorgente.Split(',');
-                string Nome = separatire[0];
-                string Cognome = separatire[1];
-                string Strada = separatire[2];
-                string Citta = separatire[3];
-                string Provincia = separatire[4];
+                    Indirizzo Bo = new Indirizzo(Nome, Cognome, Strada, Citta, Provincia, ZIP);
 
-                int ZIP = int.Parse(separatire[5]);
-
-                Indirizzo Bo = new Indirizzo(Nome, Cognome, Strada, Citta, Provincia, ZIP);
-
-                IndirizziPersonali.Add(Bo);
+                    IndirizziPersonali.Add(Bo);
+                }
 
             } catch(FormatException e)
             
             {
-                Console.WriteLine("errore");
+                Console.WriteLine("nessun risultato");
             }
+            catch (Exception e)
+            {
+                Console.WriteLine("nessun risultato numero 2");
+            }
+            finally
+            {
+
+            }
+
+
             foreach (var indirizzoFatto in IndirizziPersonali)
             {
                 Console.WriteLine(indirizzoFatto.ToString);
