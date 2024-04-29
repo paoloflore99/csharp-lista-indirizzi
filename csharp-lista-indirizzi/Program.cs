@@ -19,17 +19,24 @@
                     string? riga = sorgente.ReadLine();
                     string[] separatire = riga.Split(',');
 
-                    string Nome = separatire.Length > 0 ? separatire[0] : "nome mancante";
-                    string Cognome = separatire.Length > 0 ? separatire[1] : "cognome mancante";
-                        if (Cognome == null)
+                    string Nome = separatire[0];
+                        if (string.IsNullOrEmpty(Nome))
+                        {
+                            Nome = "nome non completo";
+                        }
+                            
+                    string Cognome = separatire[1];
+                        if (string.IsNullOrEmpty(Cognome))
                         {
                             Cognome = "Cognome mancante";
                         }
+
                     string Strada = separatire[2];
                         if (Strada.Length < 5)
                         {
                             Strada = "dato non completo";
                         }
+
                     string Citta = separatire[3];
                         if (Strada.Length < 5)
                         {
@@ -40,12 +47,19 @@
                         {
                             Provincia = "dato non valido";
                         }
-                   // int ZIP = int.Parse(separatire[5]);
+                    int ZIP = int.Parse(separatire[5]);
+                        if ( ZIP == 0 )
+                        {
+                            string valoreZIP = ZIP.ToString();
+                            valoreZIP = "numero  non valido ";
+                            valoreZIP = separatire[5];
+
+                        }
 
 
 
 
-                    Indirizzo Bo = new Indirizzo(Nome, Cognome, Strada, Citta, Provincia, ZIP);
+                        Indirizzo Bo = new Indirizzo(Nome, Cognome, Strada, Citta, Provincia, ZIP);
 
                     IndirizziPersonali.Add(Bo);
                 }
@@ -67,7 +81,7 @@
 
             foreach (var indirizzoFatto in IndirizziPersonali)
             {
-                Console.WriteLine(indirizzoFatto.ToString);
+                Console.WriteLine(indirizzoFatto.ToString());
             }
         }
     }
