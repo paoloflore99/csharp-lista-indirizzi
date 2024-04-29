@@ -17,8 +17,42 @@
             var sorgente = File.ReadAllText(path);
 
             //3 stampo in terminale
-            Console.WriteLine(sorgente);
+            //Console.WriteLine(sorgente);
 
+            //non va 
+            //sorgente.EndOfStream
+
+            List<Indirizzo> IndirizziPersonali = new List<Indirizzo>();
+
+
+
+
+
+            try
+            {
+
+                var separatire = sorgente.Split(',');
+                string Nome = separatire[0];
+                string Cognome = separatire[1];
+                string Strada = separatire[2];
+                string Citta = separatire[3];
+                string Provincia = separatire[4];
+
+                int ZIP = int.Parse(separatire[5]);
+
+                Indirizzo Bo = new Indirizzo(Nome, Cognome, Strada, Citta, Provincia, ZIP);
+
+                IndirizziPersonali.Add(Bo);
+
+            } catch(FormatException e)
+            
+            {
+                Console.WriteLine("errore");
+            }
+            foreach (var indirizzoFatto in IndirizziPersonali)
+            {
+                Console.WriteLine(indirizzoFatto.ToString);
+            }
         }
     }
 }
