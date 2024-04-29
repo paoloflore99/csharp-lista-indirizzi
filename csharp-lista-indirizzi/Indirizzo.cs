@@ -16,7 +16,12 @@ namespace csharp_lista_indirizzi
         public int ZIP {  get; set; }
         public Indirizzo (string Nome , string Cognome , string Strada , string Citta  , string Provincia , int ZIP)
         {
-
+            this.Nome = Nome;
+            this.Cognome = Cognome;
+            this.Strada = Strada;
+            this.Citta = Citta;
+            this.Provincia = Provincia;
+            this.ZIP = ZIP;
         }
     }
 }
